@@ -81,8 +81,8 @@ setuptools.setup(
     download_url='https://pypi.org/project/harvesters_gui/',
     # A list of required Python modules:
     install_requires=[
-        'PyQt5<=5.13',
-        'vispy<=0.6',
+        'PyQt5',
+        'vispy',
         'harvesters>=1.1',
     ],
 
