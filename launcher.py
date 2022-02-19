@@ -26,5 +26,25 @@ from harvesters_gui.frontend.pyqt5 import Harvester
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     h = Harvester()
+
+    # Add interface file
+    cti ='/home/hansm/.pyenv/versions/3.8.9/envs/venv_harvesters/lib/python3.8/site-packages/genicam/TLSimu.cti'
+    h.harvester_core.reset()
+    h.harvester_core.add_file(file_path=cti, check_existence=True, check_validity=True)
+    h.harvester_core.update()
+
+    # Update the device list in the gui
+    h.device_list.update()
+
+    # Update the enabled state
+    h.button_select_file.update()
+    h.button_select_file.update_observers()
+
+    h.action_on_connect()
+    h.button_connect.update()
+    h.button_connect.update_observers()
+
+    # Start the application
     h.show()
     sys.exit(app.exec_())
+    

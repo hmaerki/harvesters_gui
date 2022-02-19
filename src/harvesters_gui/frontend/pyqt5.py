@@ -197,6 +197,7 @@ class Harvester(QMainWindow):
             action=self.action_on_select_file,
             is_enabled=self.is_enabled_on_select_file
         )
+        self.button_select_file = button_select_file
         shortcut_key = 'Ctrl+o'
         button_select_file.setToolTip(
             compose_tooltip('Open a CTI file to load', shortcut_key)
@@ -225,6 +226,7 @@ class Harvester(QMainWindow):
             action=self.action_on_connect,
             is_enabled=self.is_enabled_on_connect
         )
+        self.button_connect = button_connect
         shortcut_key = 'Ctrl+c'
         button_connect.setToolTip(
             compose_tooltip(

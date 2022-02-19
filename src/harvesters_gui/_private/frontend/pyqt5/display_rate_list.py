@@ -29,20 +29,17 @@ from harvesters_gui._private.frontend.pyqt5.helper import get_system_font
 
 class ComboBoxDisplayRateList(QComboBox):
     #
-    _dict_disp_rates = {'30 fps': 0, '60 fps': 1}
+    _list_disp_rates = [10, 30, 60, 300]
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFont(get_system_font())
-        for d in self._dict_disp_rates:
-            self.addItem(d)
-        self.setCurrentIndex(self._dict_disp_rates['30 fps'])
-        self.currentTextChanged.connect(self._set_display_rate)
+        for disp_rate in self._list_disp_rates:
+            self.addItem(f"{disp_rate} fps")
+        self.setCurrentIndex(0)
+        self.currentIndexChanged.connect(self._set_display_rate)
 
-    def _set_display_rate(self, value):
-        if value == '30 fps':
-            display_rate = 30.
-        else:
-            display_rate = 60.
+    def _set_display_rate(self, idx):
+        display_rate = float(self._list_disp_rates[idx])
         self.parent().parent().canvas.display_rate = display_rate
 
