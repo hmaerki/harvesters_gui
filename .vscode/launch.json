@@ -10,15 +10,23 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": true
         },
         {
-            "name": "Python: launcher.py",
+            "name": "Python: harversters_gui_grpc",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/launcher.py",
+            "program": "${workspaceFolder}/harversters_gui_grpc.py",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": true
+        },
+        {
+            "name": "Python: harvesters_client.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/harvesters_client.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

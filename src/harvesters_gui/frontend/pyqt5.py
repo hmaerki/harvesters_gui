@@ -23,6 +23,7 @@ import datetime
 import os
 import sys
 import time
+import pathlib
 
 # Related third party imports
 from PyQt5.QtCore import QMutexLocker, QMutex, pyqtSignal, QThread
@@ -41,6 +42,7 @@ import vispy.io as vpio
 
 # Local application/library specific imports
 from harvesters.core import Harvester as HarvesterCore
+from harvesters.util import pfnc
 from harvesters_gui._private.frontend.canvas import Canvas2D
 from harvesters_gui._private.frontend.helper import compose_tooltip
 from harvesters_gui._private.frontend.pyqt5.about import About
@@ -689,14 +691,32 @@ class Harvester(QMainWindow):
 
     def action_on_snapshot(self):
         if self.canvas._buffers:
-            buffer = self.canvas._buffers[0].payload.components[0]
-            image = Image.frombytes("L", (buffer.width, buffer.height), buffer.data)
-            file_name = time.strftime("SnapShot[%Y.%m.%d]_[%H.%M.%S].bmp")
-            file_name = os.path.join(self.ia.save_path, file_name)
-            image.save(file_name, format='bmp')
+            file_name = time.strftime("SnapShot%Y.%m.%d_%H.%M.%S.bmp")
+            DIRECTORY_HOME = pathlib.Path(__file__).parent.parent.parent.parent
+            assert (DIRECTORY_HOME / "launcher.py").exists()
+            error = self.acquire(filename=str(DIRECTORY_HOME / file_name))
             return True
         else:
             return False
+
+    def acquire(self, filename:str) -> str:
+        if self.canvas._buffers:
+            buffer = self.canvas._buffers[0].payload.components[0]
+
+            def getmode():
+                if buffer.data_format in pfnc.rgb_formats:
+                    return "RGB"
+                if buffer.data_format in pfnc.rgba_formats:
+                    return "RGBA"
+                if buffer.data_format in pfnc.component_8bit_formats:
+                    return "L"
+                raise NotImplementedError
+
+            pathlib.Path(filename).parent.mkdir(parents=True, exist_ok=True)
+            image = Image.frombytes(mode=getmode(), size=(buffer.width, buffer.height), data=buffer.data)
+            image.save(filename, format='bmp')
+            return ''
+        return 'No buffers ready'
 
     def action_on_save_path(self):
         dialog = QFileDialog(self)

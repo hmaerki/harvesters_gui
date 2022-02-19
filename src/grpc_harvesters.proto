@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option objc_class_prefix = "HLW";
+
+// The harvesters service definition.
+service Harvesters {
+  rpc Acquire (AcquireRequest) returns (AcquireReply) {}
+}
+
+// The request message asking harvesters to save a image.
+message AcquireRequest {
+  string filename = 1;
+}
+
+// The response containing a error message
+message AcquireReply {
+  string message = 1;
+}

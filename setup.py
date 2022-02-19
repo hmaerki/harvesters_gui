@@ -84,6 +84,8 @@ setuptools.setup(
         'PyQt5',
         'vispy',
         'harvesters>=1.1',
+        'grpcio',
+        'grpcio-tools',
     ],
 
     license='Apache Software License V2.0',
