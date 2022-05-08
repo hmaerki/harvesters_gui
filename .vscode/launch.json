@@ -16,7 +16,7 @@
             "name": "Python: harversters_gui_grpc",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/harversters_gui_grpc.py",
+            "program": "${workspaceFolder}/start_harvesters_gui_grpc.py",
             "console": "integratedTerminal",
             "justMyCode": true
         },

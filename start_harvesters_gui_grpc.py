@@ -51,6 +51,7 @@ if __name__ == "__main__":
         r"C:\Program Files\Basler\pylon 6\Runtime\x64\ProducerU3V.cti",
         "/home/hansm/.pyenv/versions/3.8.9/envs/venv_harvesters/lib/python3.8/site-packages/genicam/TLSimu.cti",
         r"C:\Program Files\Python38\Lib\site-packages\genicam\TLSimu.cti",
+        r"C:\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\x64\mvGenTLProducer.cti",
     )
     h.harvester_core.reset()
     for cti in cti_files:
